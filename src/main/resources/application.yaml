@@ -1,0 +1,25 @@
+server:
+  port: 8027
+
+
+spring:
+  application:
+    name: MultiWatch
+
+  datasource:
+    url: jdbc:mysql://localhost:3308/multi_watch
+    username: root
+    password: 1234
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
