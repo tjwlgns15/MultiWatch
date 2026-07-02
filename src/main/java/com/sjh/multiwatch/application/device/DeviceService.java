@@ -3,6 +3,7 @@ package com.sjh.multiwatch.application.device;
 import com.sjh.multiwatch.domain.device.Device;
 import com.sjh.multiwatch.domain.device.DeviceRepository;
 import com.sjh.multiwatch.infrastructure.exception.CustomException;
+import com.sjh.multiwatch.infrastructure.security.aop.TenantScoped;
 import com.sjh.multiwatch.presentation.device.dto.RegisterDeviceRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import static com.sjh.multiwatch.infrastructure.exception.ErrorCode.DUPLICATE_DEVICE_KEY;
 
+@TenantScoped
 @Service
 @RequiredArgsConstructor
 @Slf4j
