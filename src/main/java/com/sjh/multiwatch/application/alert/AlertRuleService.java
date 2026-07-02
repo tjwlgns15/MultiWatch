@@ -6,12 +6,14 @@ import com.sjh.multiwatch.domain.device.Device;
 import com.sjh.multiwatch.domain.device.DeviceRepository;
 import com.sjh.multiwatch.infrastructure.exception.CustomException;
 import com.sjh.multiwatch.infrastructure.exception.ErrorCode;
+import com.sjh.multiwatch.infrastructure.security.aop.TenantScoped;
 import com.sjh.multiwatch.presentation.alert.dto.RegisterAlertRuleRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@TenantScoped
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class AlertRuleService {
