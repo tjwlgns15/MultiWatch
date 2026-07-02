@@ -4,11 +4,16 @@ import com.sjh.multiwatch.domain.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 
 @Entity
 @Table(name = "devices")
 @Getter
 @NoArgsConstructor
+@FilterDef(name = "tenantFilter", parameters = @ParamDef(name = "orgId", type = Long.class))
+@Filter(name = "tenantFilter", condition = "organization_id = :orgId")
 public class Device extends BaseTimeEntity {
 
     @Id

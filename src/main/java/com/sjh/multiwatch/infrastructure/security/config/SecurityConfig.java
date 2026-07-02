@@ -27,7 +27,7 @@ public class SecurityConfig {
     @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/api/auth/**", "/api/devices/**", "/api/organizations/**", "/ws/**")
+                .securityMatcher("/api/auth/**", "/api/devices/**", "/api/organizations/**", "/api/alert-rules/**", "/ws/**")
 
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth

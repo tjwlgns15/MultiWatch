@@ -22,6 +22,7 @@ public class GatewaySecurityConfig {
     public SecurityFilterChain gatewaySecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .securityMatcher("/api/gateway/**")
+
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(apiKeyAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
