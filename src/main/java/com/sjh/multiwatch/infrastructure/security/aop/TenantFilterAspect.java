@@ -18,7 +18,7 @@ public class TenantFilterAspect {
 
     private final EntityManager entityManager;
 
-    @Before("execution(* com.sjh.multiwatch.application..*Service.*(..))")
+    @Before("@within(com.sjh.multiwatch.infrastructure.security.aop.TenantScoped)")
     public void enableTenantFilter() {
         Long organizationId = currentOrganizationId();
 
