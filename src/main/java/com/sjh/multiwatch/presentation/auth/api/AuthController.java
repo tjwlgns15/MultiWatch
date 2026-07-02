@@ -1,7 +1,7 @@
-package com.sjh.multiwatch.presentation.api.auth;
+package com.sjh.multiwatch.presentation.auth.api;
 
 import com.sjh.multiwatch.application.auth.AuthService;
-import com.sjh.multiwatch.presentation.dto.LoginRequest;
+import com.sjh.multiwatch.presentation.auth.dto.LoginRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

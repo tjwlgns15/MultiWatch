@@ -2,9 +2,7 @@ package com.sjh.multiwatch.infrastructure.security;
 
 import com.sjh.multiwatch.domain.member.Member;
 import com.sjh.multiwatch.domain.member.MemberRole;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 사용자 인증 객체
+ */
 @Getter
 public class MemberPrincipal implements UserDetails {
 
