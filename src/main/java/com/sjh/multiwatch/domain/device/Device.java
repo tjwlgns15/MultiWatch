@@ -8,6 +8,8 @@ import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "devices")
 @Getter
@@ -35,6 +37,9 @@ public class Device extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private DeviceStatus status;
 
+    @Column(name = "last_reading_at")
+    private LocalDateTime lastReadingAt;
+
     private Device(Long organizationId, String deviceKey, String name, DeviceType deviceType) {
         this.organizationId = organizationId;
         this.deviceKey = deviceKey;
@@ -45,6 +50,14 @@ public class Device extends BaseTimeEntity {
 
     public static Device register(Long organizationId, String deviceKey, String name, DeviceType deviceType) {
         return new Device(organizationId, deviceKey, name, deviceType);
+    }
+
+    /**
+     * 리딩 수신 시 호출 - 온라인 전환 + 마지막 수신 시각 갱신을 하나의 도메인 행위로 묶음.
+     */
+    public void receiveReading(LocalDateTime recordedAt) {
+        this.status = DeviceStatus.ONLINE;
+        this.lastReadingAt = recordedAt;
     }
 
     public void markOnline() {

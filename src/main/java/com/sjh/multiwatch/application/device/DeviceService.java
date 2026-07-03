@@ -17,6 +17,7 @@ import static com.sjh.multiwatch.infrastructure.exception.ErrorCode.DUPLICATE_DE
 @TenantScoped
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Slf4j
 public class DeviceService {
 

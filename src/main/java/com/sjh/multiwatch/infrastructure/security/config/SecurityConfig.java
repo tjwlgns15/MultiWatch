@@ -1,10 +1,12 @@
 package com.sjh.multiwatch.infrastructure.security.config;
 
 import com.sjh.multiwatch.infrastructure.security.MemberDetailsService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,25 +24,28 @@ public class SecurityConfig {
 
     private final MemberDetailsService memberDetailsService;
 
-
     @Bean
     @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/api/auth/**", "/api/devices/**", "/api/organizations/**", "/api/alert-rules/**", "/ws/**")
-
+                .securityMatcher(
+                        "/api/auth/**", "/api/devices/**", "/api/organizations/**",
+                        "/api/alert-rules/**", "/api/alerts/**", "/api/members/**", "/ws/**"
+                )
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/organizations").permitAll()
                         .anyRequest().authenticated()
                 )
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(
+                        (request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED)
+                ))
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                         .maximumSessions(1)
                 )
-                .userDetailsService(memberDetailsService)
-
-        ;
+                .userDetailsService(memberDetailsService);
 
         return http.build();
     }

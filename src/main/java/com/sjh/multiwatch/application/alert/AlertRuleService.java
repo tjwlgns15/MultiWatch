@@ -6,14 +6,14 @@ import com.sjh.multiwatch.domain.device.Device;
 import com.sjh.multiwatch.domain.device.DeviceRepository;
 import com.sjh.multiwatch.infrastructure.exception.CustomException;
 import com.sjh.multiwatch.infrastructure.exception.ErrorCode;
-import com.sjh.multiwatch.infrastructure.security.aop.TenantScoped;
 import com.sjh.multiwatch.presentation.alert.dto.RegisterAlertRuleRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
-@TenantScoped
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class AlertRuleService {
@@ -21,14 +21,20 @@ public class AlertRuleService {
     private final AlertRuleRepository alertRuleRepository;
     private final DeviceRepository deviceRepository;
 
-
     @Transactional
-    public Long createRule(RegisterAlertRuleRequest request) {
-        Device device = deviceRepository.findById(request.deviceId())
+    public Long createRule(RegisterAlertRuleRequest request, Long organizationId) {
+        Device device = deviceRepository.findByIdAndOrganizationId(request.deviceId(), organizationId)
                 .orElseThrow(() -> new CustomException(ErrorCode.DEVICE_NOT_FOUND));
 
         AlertRule alertRule = AlertRule.create(device.getId(), request.thresholdValue(), request.comparator());
         return alertRuleRepository.save(alertRule).getId();
+    }
+
+    public List<AlertRule> getRules(Long deviceId, Long organizationId) {
+        Device device = deviceRepository.findByIdAndOrganizationId(deviceId, organizationId)
+                .orElseThrow(() -> new CustomException(ErrorCode.DEVICE_NOT_FOUND));
+
+        return alertRuleRepository.findByDeviceId(device.getId());
     }
 
     @Transactional

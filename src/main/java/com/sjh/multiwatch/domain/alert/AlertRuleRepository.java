@@ -9,4 +9,5 @@ import java.util.List;
 public interface AlertRuleRepository extends JpaRepository<AlertRule, Long> {
     List<AlertRule> findByDeviceIdAndEnabledTrue(Long deviceId);
 
+    List<AlertRule> findByDeviceId(Long deviceId);
 }

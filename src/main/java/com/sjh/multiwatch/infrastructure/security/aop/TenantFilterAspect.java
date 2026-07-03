@@ -11,6 +11,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+/**
+ * 테넌트 격리 검증 필터
+ * findAll 같은 일반 조회는 동작하지만, findById 같은 직접 조회에는 적용되지 않는다
+ */
 @Aspect
 @Component
 @RequiredArgsConstructor

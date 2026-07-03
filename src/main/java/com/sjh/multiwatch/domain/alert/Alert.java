@@ -3,6 +3,9 @@ package com.sjh.multiwatch.domain.alert;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +13,8 @@ import java.time.LocalDateTime;
 @Table(name = "alerts")
 @Getter
 @NoArgsConstructor
+@FilterDef(name = "tenantFilter", parameters = @ParamDef(name = "orgId", type = Long.class))
+@Filter(name = "tenantFilter", condition = "organization_id = :orgId")
 public class Alert {
 
     @Id
