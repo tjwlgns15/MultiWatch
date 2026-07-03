@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>MultiWatch 로그인</title>
+    <style>
+        :root{
+            --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --border:#2a2f3a;
+            --text:#e6e8ec; --sub:#8b93a3; --accent:#4f8cff; --danger:#ff5566;
+        }
+        *{box-sizing:border-box;}
+        body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;
+            font-family:-apple-system,'Segoe UI',Pretendard,sans-serif;background:var(--bg);color:var(--text);}
+        .login-box{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:32px;width:320px;}
+        .login-box h1{font-size:18px;margin:0 0 20px;}
+        .login-box input{width:100%;padding:10px 12px;margin-bottom:10px;background:var(--panel2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;}
+        .login-box button{width:100%;padding:10px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-size:14px;cursor:pointer;margin-top:6px;}
+        .login-box button:hover{opacity:.9;}
+        .login-error{color:var(--danger);font-size:12px;margin-top:8px;min-height:16px;}
+    </style>
+</head>
+<body>
+<div class="login-box">
+    <h1>MultiWatch 로그인</h1>
+    <input id="login-email" type="text" placeholder="이메일" autocomplete="username" />
+    <input id="login-password" type="password" placeholder="비밀번호" autocomplete="current-password" onkeydown="if(event.key==='Enter') login()" />
+    <button onclick="login()">로그인</button>
+    <div class="login-error" id="login-error"></div>
+</div>
+
+<script>
+    const BASE = window.location.origin;
+
+    // 대시보드 게이트(DashboardSecurityConfig)가 미인증 접근을 이 페이지로 리다이렉트할 때
+    // 원래 가려던 경로를 쿼리스트링(?<redirect-param>)으로 붙여줄 수 있으므로 이를 우선 사용한다.
+    function resolveRedirectTarget() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('continue') || '/dashboard';
+    }
+
+    async function login() {
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+        const errEl = document.getElementById('login-error');
+        errEl.textContent = '';
+
+        try {
+            const res = await fetch(`${BASE}/api/auth/login`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            if (!res.ok) {
+                errEl.textContent = '로그인 실패: 이메일/비밀번호를 확인하세요.';
+                return;
+            }
+            window.location.href = resolveRedirectTarget();
+        } catch (e) {
+            errEl.textContent = '서버 연결 실패. 서버가 실행 중인지 확인하세요.';
+        }
+    }
+</script>
+</body>
+</html>

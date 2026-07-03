@@ -5,7 +5,7 @@ import com.sjh.multiwatch.domain.member.MemberRepository;
 import com.sjh.multiwatch.domain.organization.Organization;
 import com.sjh.multiwatch.domain.organization.OrganizationRepository;
 import com.sjh.multiwatch.infrastructure.exception.CustomException;
-import com.sjh.multiwatch.presentation.organization.dto.SignUpRequest;
+import com.sjh.multiwatch.presentation.api.organization.dto.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

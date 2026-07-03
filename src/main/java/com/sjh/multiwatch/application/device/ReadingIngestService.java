@@ -5,7 +5,7 @@ import com.sjh.multiwatch.domain.device.DeviceRepository;
 import com.sjh.multiwatch.infrastructure.exception.CustomException;
 import com.sjh.multiwatch.infrastructure.kafka.ReadingKafkaProducer;
 import com.sjh.multiwatch.infrastructure.security.aop.TenantScoped;
-import com.sjh.multiwatch.presentation.device.dto.IngestReadingRequest;
+import com.sjh.multiwatch.presentation.api.device.dto.IngestReadingRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -4,7 +4,7 @@ import com.sjh.multiwatch.domain.device.Device;
 import com.sjh.multiwatch.domain.device.DeviceRepository;
 import com.sjh.multiwatch.infrastructure.exception.CustomException;
 import com.sjh.multiwatch.infrastructure.security.aop.TenantScoped;
-import com.sjh.multiwatch.presentation.device.dto.RegisterDeviceRequest;
+import com.sjh.multiwatch.presentation.api.device.dto.RegisterDeviceRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

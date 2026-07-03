@@ -11,8 +11,8 @@ public class AlertBroadcastService {
 
     private final SimpMessagingTemplate messagingTemplate;
 
-    public void broadcast(Alert alert) {
+    public void broadcast(Alert alert, Long deviceId) {
         String destination = "/topic/org/" + alert.getOrganizationId() + "/alerts";
-        messagingTemplate.convertAndSend(destination, AlertBroadcastPayload.from(alert));
+        messagingTemplate.convertAndSend(destination, AlertBroadcastPayload.from(alert, deviceId));
     }
 }

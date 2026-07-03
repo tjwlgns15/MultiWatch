@@ -7,7 +7,7 @@ import com.sjh.multiwatch.domain.device.DeviceRepository;
 import com.sjh.multiwatch.domain.device.DeviceType;
 import com.sjh.multiwatch.domain.organization.Organization;
 import com.sjh.multiwatch.domain.organization.OrganizationRepository;
-import com.sjh.multiwatch.presentation.device.dto.IngestReadingRequest;
+import com.sjh.multiwatch.presentation.api.device.dto.IngestReadingRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

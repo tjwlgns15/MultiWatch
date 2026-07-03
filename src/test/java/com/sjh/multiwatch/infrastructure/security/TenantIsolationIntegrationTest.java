@@ -9,7 +9,7 @@ import com.sjh.multiwatch.domain.member.Member;
 import com.sjh.multiwatch.domain.member.MemberRepository;
 import com.sjh.multiwatch.domain.organization.Organization;
 import com.sjh.multiwatch.domain.organization.OrganizationRepository;
-import com.sjh.multiwatch.presentation.alert.dto.RegisterAlertRuleRequest;
+import com.sjh.multiwatch.presentation.api.alert.dto.RegisterAlertRuleRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

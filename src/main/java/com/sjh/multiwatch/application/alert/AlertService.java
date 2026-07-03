@@ -4,7 +4,6 @@ import com.sjh.multiwatch.domain.alert.Alert;
 import com.sjh.multiwatch.domain.alert.AlertRepository;
 import com.sjh.multiwatch.infrastructure.exception.CustomException;
 import com.sjh.multiwatch.infrastructure.security.aop.TenantScoped;
-import com.sjh.multiwatch.presentation.alert.dto.AlertResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

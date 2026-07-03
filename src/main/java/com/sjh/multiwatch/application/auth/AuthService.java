@@ -1,6 +1,6 @@
 package com.sjh.multiwatch.application.auth;
 
-import com.sjh.multiwatch.presentation.auth.dto.LoginRequest;
+import com.sjh.multiwatch.presentation.api.auth.dto.LoginRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
