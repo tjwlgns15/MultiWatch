@@ -22,7 +22,7 @@ public class OrganizationService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Long signUp(SignUpRequest request) {
+    public Organization signUp(SignUpRequest request) {
         validateEmailNotDuplicated(request.adminEmail());
 
         Organization organization = organizationRepository.save(Organization.register(request.organizationName()));
@@ -32,7 +32,7 @@ public class OrganizationService {
         );
         memberRepository.save(admin);
 
-        return organization.getId();
+        return organization;
     }
 
     private void validateEmailNotDuplicated(String email) {
